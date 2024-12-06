@@ -118,9 +118,9 @@ build() {
   export CFLAGS="$CFLAGS -ffat-lto-objects"
 
   # Apply flags for cross-compilation
-  export CROSSCFLAGS="-O2 -pipe -g -march=native"
-  export CROSSCXXFLAGS="-O2 -pipe -g -march=native"
-  export CROSSLDFLAGS="-Wl,-O1"
+  export CROSSCFLAGS="-O2 -march=native -mtune=native -fno-semantic-interposition -fcf-protection=none -mharden-sls=none -funroll-loops -fivopts -fmodulo-sched -fdata-sections -ffunction-sections -fprofile-correction -floop-nest-optimize -fipa-pta -fgraphite-identity -floop-strip-mine"
+  export CROSSCXXFLAGS="-O2 -march=native -mtune=native -fno-semantic-interposition -fcf-protection=none -mharden-sls=none -funroll-loops -fivopts -fmodulo-sched -fdata-sections -ffunction-sections -fprofile-correction -floop-nest-optimize -fipa-pta -fgraphite-identity -floop-strip-mine"
+  export CROSSLDFLAGS="-Wl,-O2,--sort-common,--as-needed,-lgomp,--file-alignment,4096"
 
   echo "Building Wine..."
   cd "$pkgname-build"
